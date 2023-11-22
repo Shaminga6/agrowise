@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Vithkuqi&family=Freckle+Face&display=swap");
+
+@font-face {
+  font-family: "Josefin";
+  src: url("/public/fonts/JosefinSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#nav-bar {
+  box-shadow: -1px 2px 5px 0px #80808033 !important;
+}
+
+.banner-wrapper {
+  background-image: url("./assets/bannerImg.png");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  margin: 25px 40px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: end;
+  overflow: hidden;
+}
+
+.banner-shape-holder {
+  width: 85%;
+  height: 60%;
+}
+
+.banner-white-layer {
+  width: 85%;
+  height: 60%;
+}
+
+.box {
+  width: 100%;
+  height: 200px;
+  background-color: #fff;
+  margin: 100px auto;
+  filter: url(#round);
+  position: relative;
+  rotate: 180deg;
+  margin-top: -10px;
+  border-top-right-radius: 30px;
+}
+.box::before,
+.box::after {
+  content: "";
+  position: absolute;
+  border-radius: 30px;
+  width: 50%;
+  height: 92%;
+  bottom: 162px;
+  background: inherit;
+  left: -40px;
+  right: 158px !important;
+  background: inherit;
+}
+.box::after {
+  right: -40px;
+  left: auto;
+}
+.box div {
+  width: 80%;
+  height: 106px;
+  margin: auto;
+  position: relative;
+  top: -251px;
+  left: -201px;
+  background: inherit;
+}
+
+.content-div {
+  font-family: "Josefin";
+  position: absolute;
+  height: 185px;
+  width: 88%;
+  background-color: #fff;
+  top: 0;
+  right: -5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description-div {
+  position: absolute;
+  top: 35%;
+  right: 29%;
+  width: 40%;
+  font-size: 18px;
+}
+
+#banner-title {
+  font-family: "Freckle Face";
+  font-size: 78px;
+  font-weight: 400;
+}
+
+#cropImg {
+  margin-top: 108px;
+  width: 24%;
+  margin-right: 81px;
+}
+
+.banner-btn-wrapper {
+  position: absolute;
+  top: 55%;
+  right: 28%;
+  width: 28%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner-btn {
+  width: 170px;
+  padding: 6px 30px;
+  border: 2px solid #216206;
+  color: #216206;
+  border-radius: 5px;
+}
+
+#banner-login-btn {
+  background-color: #216206;
+  color: #fff;
+}
+
+.mobile-display-data {
+  display: none;
+}
+
+/* =================== Tablet breakpoint =========================== */
+@media screen and (min-width: 768px) and (max-width: 1115px) {
+  .banner-wrapper {
+    height: 80vh;
+    margin: 20px;
+    border-radius: 10px;
+  }
+
+  #banner-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  #cropImg {
+    margin-top: 17px;
+    width: 24%;
+    margin-right: 55px;
+  }
+
+  .description-div {
+    position: absolute;
+    top: 24%;
+    right: 14%;
+    width: 40%;
+    font-size: 18px;
+  }
+
+  .banner-btn-wrapper {
+    position: absolute;
+    top: 53%;
+    right: -2%;
+    width: 44%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .banner-btn {
+    width: 146px;
+  }
+}
+
+/* =================== Mobile breakpoint =========================== */
+
+@media screen and (max-width: 768px) {
+  .banner-wrapper {
+    margin: 20px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+  }
+
+  .mobile-display-data {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #090909c4;
+    padding-top: 40px;
+    text-align: center;
+  }
+
+  .banner-white-layer {
+    display: none;
+  }
+
+  #banner-title-mobile {
+    color: #fff;
+    font-size: 38px;
+    margin-top: 20px;
+    font-family: "Freckle Face";
+  }
+
+  #banner-desc-mobile {
+    font-family: "Josefin";
+    color: #dfd9d9;
+    font-size: 20px;
+    padding: 20px 20px;
+  }
+
+  #mobile-signup-btn {
+    border: 2px solid #fff;
+    color: #fff;
+  }
+
+  #banner-login-btn {
+    border: 2px solid #216206;
+    margin-left: 10px;
+  }
+}
