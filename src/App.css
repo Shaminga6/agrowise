@@ -129,6 +129,24 @@
 .mobile-display-data {
   display: none;
 }
+/* ===================== Mission Section ============================== */
+
+#mission-title {
+  font-family: "Freckle Face";
+  font-size: 48px;
+  color: #216206;
+  width: 244px;
+}
+
+.mission-section-wrapper > p {
+  line-height: 27px;
+}
+
+
+.no-top{
+  padding-top: 0 ;
+}
+
 
 /* =================== Tablet breakpoint =========================== */
 @media screen and (min-width: 768px) and (max-width: 1115px) {
@@ -218,4 +236,11 @@
     border: 2px solid #216206;
     margin-left: 10px;
   }
+
+
+  #mission-title {
+    
+    width: unset;
+    text-align: center;
+}
 }
