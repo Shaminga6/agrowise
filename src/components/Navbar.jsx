@@ -23,7 +23,7 @@ const Navbar = () => {
           id="nav-bar"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Agrowise</span>
               <img className="h-8 w-auto" src={logo} alt="company logo" />
             </a>
@@ -52,10 +52,9 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
+            <a href="/"
               className="text-sm font-semibold leading-6 text-gray-900"
-            ></a>
+            > </a>
           </div>
         </nav>
         <Dialog
@@ -67,7 +66,7 @@ const Navbar = () => {
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Agrowise</span>
                 <img className="h-8 w-auto" src={logo} alt="" />
               </a>
