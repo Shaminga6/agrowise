@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
 import MissionSection from "../components/MissionSection";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Navbar />
       <Banner />
       <MissionSection />
+      <Footer />
     </div>
   );
 };
