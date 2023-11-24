@@ -172,6 +172,24 @@
   font-family: "Lexend", sans-serif;
 }
 
+/* Chat Area */
+.chat-trail {
+  background: #FAFAFA;
+}
+.chat-trail p {
+  background: rgba(33, 98, 6, 0.10);
+}
+.chat-topic p {
+  background: linear-gradient(125deg, #C7D8C0 -19.15%, #FDD59B 135.38%); 
+}
+.chat {
+  background: #FBFEFA;
+}
+.message-input {
+  background: rgba(25, 77, 4, 0.24);
+  box-shadow: 0px 9px 12.8px 0px rgba(143, 143, 143, 0.25); 
+}
+
 /* =================== Tablet breakpoint =========================== */
 @media screen and (min-width: 768px) and (max-width: 1115px) {
   .banner-wrapper {
