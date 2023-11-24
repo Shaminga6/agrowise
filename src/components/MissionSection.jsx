@@ -53,10 +53,10 @@ const MissionSection = () => {
           </div>
 
           <div class="grid grid-cols-2 gap-4">
-            <div class="col-span-1  p-4">
+            <div class="col-span-1  p-4" id="bottom-sm-img">
               <img src={bannerImg} alt="img" className="rounded-xl" />
             </div>
-            <div class="col-span-1  p-4">
+            <div class="col-span-1  p-4"  id="top-sm-img">
               <img src={bannerImg} alt="img" className="rounded-xl" />
             </div>
           </div>

@@ -142,11 +142,9 @@
   line-height: 27px;
 }
 
-
-.no-top{
-  padding-top: 0 ;
+.no-top {
+  padding-top: 0;
 }
-
 
 /* =================== Tablet breakpoint =========================== */
 @media screen and (min-width: 768px) and (max-width: 1115px) {
@@ -237,10 +235,18 @@
     margin-left: 10px;
   }
 
-
   #mission-title {
-    
     width: unset;
     text-align: center;
-}
+  }
+
+  #top-sm-img{
+    margin-top: -234px;
+    margin-right: -20px;
+  }
+
+  #bottom-sm-img{
+    margin-top: -102px;
+    margin-left: -20px;
+  }
 }
