@@ -187,10 +187,27 @@
 .login-form form {
   font-family: "Lexend", sans-serif;
 }
+
+@media screen and (min-width: 768px) {
+  .description-div {
+    top: 30%;
+    right: 21%;
+  }
+
+  .banner-btn-wrapper {
+    top: 49%;
+    right: 19%;
+  }
+
+  #banner-title {
+    font-size: 59px;
+  }
+}
+
 /* =================== Tablet breakpoint =========================== */
-@media screen and (min-width: 768px) and (max-width: 1115px) {
+@media screen and (min-width: 768px) and (max-width: 890px) {
   .banner-wrapper {
-    height: 80vh;
+    height: 60vh;
     margin: 20px;
     border-radius: 10px;
   }
@@ -208,7 +225,7 @@
 
   .description-div {
     position: absolute;
-    top: 24%;
+    top: 20%;
     right: 14%;
     width: 40%;
     font-size: 18px;
@@ -216,8 +233,8 @@
 
   .banner-btn-wrapper {
     position: absolute;
-    top: 53%;
-    right: -2%;
+    top: 38%;
+    right: 3%;
     width: 44%;
     display: flex;
     justify-content: space-between;
@@ -229,7 +246,6 @@
 }
 
 /* =================== Mobile breakpoint =========================== */
-
 @media screen and (max-width: 768px) {
   .banner-wrapper {
     margin: 20px 0;
