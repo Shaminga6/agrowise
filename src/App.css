@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Vithkuqi&family=Freckle+Face&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&display=swap");
 
 @font-face {
   font-family: "Josefin";
@@ -12,7 +13,7 @@
 }
 
 .banner-wrapper {
-  background-image: url("./assets/bannerImg.png");
+  background-image: url("./assets/bannerImg.webp");
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -142,10 +143,50 @@
   line-height: 27px;
 }
 
+/* ============ Footer ========================== */
+.footer {
+  background: #f7fff4;
+  padding: 62px;
+}
+
+.quick-link {
+  line-height: 30px;
+  font-size: 14px;
+}
+
+#social-ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ================================================== */
 .no-top {
   padding-top: 0;
 }
 
+.no-top {
+  padding-top: 0;
+}
+
+/* Login Section */
+.login {
+  flex: 0 0 45%;
+  width: 45%;
+  /* height: 140dvh; */
+  background-image: url("https://previews.123rf.com/images/stylephotographs/stylephotographs1407/stylephotographs140700035/29683887-hands-holding-a-shopping-basket-full-of-fresh-vegetables-and-fruits.jpg");
+  background-size: cover;
+  /* background-position: center center; */
+}
+.login-form {
+  flex: 0 0 55%;
+  font-family: "Lexend", sans-serif;
+}
+.login-form h1 {
+  font-family: "Freckle Face", sans-serif;
+}
+.login-form form {
+  font-family: "Lexend", sans-serif;
+}
 /* =================== Tablet breakpoint =========================== */
 @media screen and (min-width: 768px) and (max-width: 1115px) {
   .banner-wrapper {
@@ -240,13 +281,28 @@
     text-align: center;
   }
 
-  #top-sm-img{
-    margin-top: -234px;
+  #top-sm-img {
+    margin-top: -285px;
     margin-right: -20px;
+    box-shadow: 3px 2px 11px 1px;
   }
 
-  #bottom-sm-img{
+  #bottom-sm-img {
     margin-top: -102px;
     margin-left: -20px;
+    box-shadow: 12px 12px;
+    box-shadow: 3px 2px 11px 1px;
+  }
+
+  .footer {
+    padding: 20px;
+  }
+
+  .centered {
+    text-align: center;
+  }
+
+  .mission-section-wrapper > p {
+    text-align: justify;
   }
 }

@@ -1,7 +1,14 @@
 import MySVGComponent from "../components/MySVGComponent";
-import cropImg from "../assets/cropImg.png";
+import cropImg from "../assets/cropImg.webp";
+import { Link, useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <div className="relative banner-wrapper">
@@ -23,10 +30,15 @@ const Banner = () => {
           </div>
 
           <div className="banner-btn-wrapper">
-            <button className="banner-btn">Get Started</button>
-            <button className="banner-btn" id="banner-login-btn">
-              Login
-            </button>
+            <Link to="/signup">
+              <button className="banner-btn">Get Started</button>
+            </Link>
+
+            <Link to="/login">
+              <button className="banner-btn" id="banner-login-btn">
+                Login
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -41,12 +53,17 @@ const Banner = () => {
           </p>
 
           <div className="banner-mobile-btn">
-            <button className="banner-btn" id="mobile-signup-btn">
-              Get Started
-            </button>
-            <button className="banner-btn" id="banner-login-btn">
-              Login
-            </button>
+            <Link to="/login">
+              <button className="banner-btn" id="mobile-signup-btn">
+                Get Started
+              </button>
+            </Link>
+
+            <Link to={"/signup"}>
+              <button className="banner-btn" id="banner-login-btn">
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>

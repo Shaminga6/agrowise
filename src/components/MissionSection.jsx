@@ -1,7 +1,9 @@
 import boxIcon from "../assets/boxIcon.png";
 import cartIcon from "../assets/cartIcon.png";
 import supportIcon from "../assets/supportIcon.png";
-import bannerImg from "../assets/bannerImg.png";
+import img1 from "../assets/img1.webp";
+import img2 from "../assets/img2.webp";
+import img3 from "../assets/img3.webp";
 
 const MissionSection = () => {
   return (
@@ -26,12 +28,12 @@ const MissionSection = () => {
           </p>
 
           <div class="grid grid-cols-2 gap-4 mt-4">
-            <div class="col-span-1  pt-4 pb-4 flex justify-between items-center">
+            <div class="col-span-1  pt-4 pb-4 flex justify-between items-center centered">
               <img src={boxIcon} alt="box icon" />
               <span>AI Farm solutions</span>
             </div>
 
-            <div class="col-span-1 pt-4 pb-4 flex justify-around items-center">
+            <div class="col-span-1 pt-4 pb-4 flex justify-around items-center centered">
               <img src={cartIcon} alt="cart icon" />
               <span>Certified products</span>
             </div>
@@ -48,16 +50,26 @@ const MissionSection = () => {
         <div class="col-span-1  p-4  no-top">
           <div class="grid grid-cols-1 mb-4 gap-4">
             <div class="col-span-1  p-4">
-              <img src={bannerImg} alt="img" className="rounded-xl" />
+              <img src={img3} alt="img" className="rounded-xl" />
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-4">
-            <div class="col-span-1  p-4" id="bottom-sm-img">
-              <img src={bannerImg} alt="img" className="rounded-xl" />
+            <div class="col-span-1  p-4">
+              <img
+                src={img2}
+                alt="img"
+                className="rounded-xl"
+                id="top-sm-img"
+              />
             </div>
-            <div class="col-span-1  p-4"  id="top-sm-img">
-              <img src={bannerImg} alt="img" className="rounded-xl" />
+            <div class="col-span-1  p-4">
+              <img
+                src={img1}
+                alt="img"
+                className="rounded-xl"
+                id="bottom-sm-img"
+              />
             </div>
           </div>
         </div>
