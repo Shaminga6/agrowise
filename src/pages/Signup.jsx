@@ -45,9 +45,21 @@ const Signup = () => {
 
       const resLength = Object.entries(res).length;
       if (resLength === 3) {
+        const tokenRes = await (
+          await fetch(`https://agrowise-api.vercel.app/api/auth/jwt/create/`, {
+            method: "POST",
+
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          })
+        ).json();
+
         setIsLoading(false);
         localStorage.setItem("userData", res);
-        navigate("/dashboard");
+        localStorage.setItem("token", tokenRes);
+        navigate("/dashboard")
       } else {
         setIsLoading(false);
         setShowError(true);
@@ -147,6 +159,7 @@ const Signup = () => {
                   className="mr-1 w-4 h-4"
                   type="checkbox"
                   id="rememberMe"
+                  required
                 />
                 <label className="text-xs" htmlFor="rememberMe">
                   I agree to the{" "}
