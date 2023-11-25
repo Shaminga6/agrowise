@@ -1,16 +1,82 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
+import Loader from "../components/Loader";
+import ErrorAlert from "../components/ErrorAlert";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const { email, password } = formData;
+
+    try {
+      const res = await (
+        await fetch(`https://agrowise-api.vercel.app/api/auth/jwt/create/`, {
+          method: "POST",
+
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        })
+      ).json();
+
+      const token = res;
+
+      if (token.access) {
+        const data = await (
+          await fetch(`https://agrowise-api.vercel.app/api/auth/users/me/`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token.access}`,
+            },
+          })
+        ).json();
+        setIsLoading(false);
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("userData", data);
+
+        navigate("/dashboard");
+      } else {
+        setShowError(true);
+        setErrorMsg("Invalid credentials");
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
+      {showError ? <ErrorAlert errorMsg={errorMsg} /> : ""}
+
       <div className="min-h-screen flex items-center justify-end bg-white relative">
         <div className="text-center login min-h-screen overflow-x-hidden rounded-r-3xl fixed top-0 bottom-0 left-0"></div>
 
         <div className="login-form h-full w-full  flex items-center gap-6 justify-center flex-col">
           <h1 className="text-2xl">Welcome Back</h1>
-          <form className="w-3/5 full-width">
+          <form className="w-3/5 full-width" onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2 mobile-label"
@@ -23,6 +89,9 @@ const Login = () => {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
 
@@ -38,6 +107,10 @@ const Login = () => {
                 id="email"
                 type="password"
                 placeholder="Enter your password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
               />
             </div>
 
@@ -62,8 +135,9 @@ const Login = () => {
               <button
                 className="w-full full-width bg-green-900 hover:bg-green-950 text-sm font-semibold transition ease-out text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
+                disabled={isLoading}
               >
-                Login
+                {isLoading ? <Loader /> : "Login"}
               </button>
             </div>
           </form>

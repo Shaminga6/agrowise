@@ -59,7 +59,7 @@ const Signup = () => {
         setIsLoading(false);
         localStorage.setItem("userData", res);
         localStorage.setItem("token", tokenRes);
-        navigate("/dashboard")
+        navigate("/dashboard");
       } else {
         setIsLoading(false);
         setShowError(true);
@@ -96,6 +96,7 @@ const Signup = () => {
                 name="full_name"
                 value={formData.full_name}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -114,6 +115,7 @@ const Signup = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -132,6 +134,7 @@ const Signup = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -150,6 +153,7 @@ const Signup = () => {
                 name="re_password"
                 value={formData.re_password}
                 onChange={handleChange}
+                required
               />
             </div>
 
