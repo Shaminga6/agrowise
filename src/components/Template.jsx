@@ -36,9 +36,9 @@ const Dashboard = () => {
                   ></path>
                 </svg>
               </button>
-              <a href="https://flowbite.com" className="flex ms-2 md:me-24">
+              <Link to="/">
                 <img src={logo} alt="logo" id="dashboard-logo" />
-              </a>
+              </Link>
             </div>
             <div>
               <img src={avatar} alt="logo" id="dashboard-avatar" />

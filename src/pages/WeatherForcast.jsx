@@ -1,19 +1,25 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import avatar from "../assets/avatar1.png";
-import send from "../assets/send.png";
-import singleLogo from "../assets/singleLogo.png";
-import LineChart from "../components/LineChart";
-import { data1, data2 } from "../components/ChartData";
-import { useNavigate } from "react-router";
-import { appContext } from "../App";
-import wind from "../assets/wind.png";
-import wind1 from "../assets/wind1.png";
-import presure from "../assets/presure.png";
-import humidity from "../assets/humidity.png";
+import { Link, useNavigate } from "react-router-dom";
+import clock from "../assets/clock.png";
+import dailyIcon1 from "../assets/dailyIcon1.png";
+import landImg from "../assets/land.png";
+import week1 from "../assets/week1.png";
+import week2 from "../assets/week2.png";
+import week3 from "../assets/week3.png";
+import week4 from "../assets/week4.png";
+import week5 from "../assets/week5.png";
 
-const Dashboard = () => {
+import temp1 from "../assets/temp1.png";
+import temp2 from "../assets/temp2.png";
+import temp3 from "../assets/temp3.png";
+import temp4 from "../assets/temp4.png";
+import locateIcon from "../assets/locateSVG.svg";
+import { appContext } from "../App";
+import moment from "moment/moment";
+
+const WeatherForcast = () => {
   const navigate = useNavigate();
   const [weather] = useContext(appContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -22,14 +28,13 @@ const Dashboard = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  // -------- Redirect user if logged in -----------------
-  useEffect(() => {
-    const user = localStorage.getItem("userData");
-
-    if (!user) {
-      navigate("/");
-    }
-  }, []);
+  const week = [
+    ["FRI", week1],
+    ["SAT", week2],
+    ["MON", week4],
+    ["TUES", week5],
+    ["SUN", week3],
+  ];
 
   return (
     <>
@@ -58,6 +63,7 @@ const Dashboard = () => {
                   ></path>
                 </svg>
               </button>
+
               <Link to="/">
                 <img src={logo} alt="logo" id="dashboard-logo" />
               </Link>
@@ -78,7 +84,10 @@ const Dashboard = () => {
       >
         <ul class="space-y-2">
           <li>
-            <Link class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group">
+            <Link
+              to="/dashboard"
+              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group"
+            >
               <svg
                 width="18"
                 height="18"
@@ -349,162 +358,150 @@ const Dashboard = () => {
         </ul>
       </aside>
 
-      <div class="p-4 sm:ml-64 content-section">
-        <div class="p-4  rounded-lg mt-14">
-          {/* ----------- AI Card --------------- */}
-          <div class="flex flex-col items-center justify-center h-48 mb-8 AI-card">
-            <img src={singleLogo} alt="logo" id="single-logo" />
-            <h2 id="AI-text">Hello! ask me what’s on your mind.</h2>
-
-            <div className="dashB-input-wrapper">
-              <input
-                type="text"
-                id="dashboard-input"
-                placeholder="Message Agro AI"
+      <div className="p-4 sm:ml-64 mt-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div class="rounded h-70 chart-card-wrapper location">
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                src={locateIcon}
+                alt="location"
+                style={{ display: "inline", width: "30px" }}
               />
-              <img src={send} alt="send" id="dashboard-send-icon" />
+              <span style={{ fontSize: "17px" }}>
+                {weather?.location?.name}
+              </span>
             </div>
+            <h1 id="weather-type">{weather?.current?.condition?.text}</h1>{" "}
+            <br />
+            <h1 id="weather-type-sub">
+              {Math.round(weather?.current?.temp_c)}&deg;C
+            </h1>
+            <span>
+              {moment().format("dddd")} | {moment().format("ll")}
+            </span>
           </div>
 
-          {/* -------------- Weather card --------------------- */}
-          <div class=" h-50 mb-10 rounded  weather-card">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div class="dashboardTemp-wrapper p-4">
-                <span id="dashboardTemp">
-                  {weather ? Math.round(weather?.current?.temp_c) : 0}&deg;C
-                </span>
-              </div>
-              <div class=" p-4 sun-div">
+          <div
+            class="rounded h-70 chart-card-wrapper"
+            id="weather-forcast-column"
+          >
+            <img
+              src={weather?.current?.condition?.icon}
+              alt="thunder"
+              id="weather-forcast-icon"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 sm:ml-64 mt-0 ">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div
+            class="rounded h-70 chart-card-wrapper daily-cast-column"
+            style={{ boxShadow: "unset" }}
+          >
+            <div className="daily-forcast">
+              <div>
                 <img
-                  src={weather?.current?.condition?.icon}
-                  alt="sun"
-                  id="day-icon"
+                  src={clock}
+                  alt="clock"
+                  style={{ display: " inline", marginRight: "10px" }}
                 />
-                <span id="weather-desc">
-                  {weather?.current?.condition?.text}
-                </span>
+                <span>24-hour forecast</span>
               </div>
-              <div class="">
-                <div class="flex">
-                  <div
-                    class="flex-1  p-4 text-center"
-                    style={{ color: "#464444" }}
-                  >
-                    <img src={humidity} alt="" className="dashboard-w-icon" />{" "}
-                    <br />
-                    <strong>
-                      <span>{weather?.current?.humidity}%</span>
-                    </strong>
-                    <br />
-                    <span>Humidity</span>
-                  </div>
 
-                  <div
-                    class="flex-1  p-4 text-center"
-                    style={{ color: "#464444" }}
-                  >
-                    <img src={wind1} alt="" className="dashboard-w-icon" />{" "}
-                    <br />
-                    <strong>
-                      <span>{weather?.current?.cloud}km/h</span>
-                    </strong>
-                    <br />
-                    <span>Wind Speed</span>
-                  </div>
-                </div>
-
-                <div class="flex">
-                  <div
-                    class="flex-1  p-4 text-center"
-                    style={{ color: "#464444" }}
-                  >
-                    <img src={presure} alt="" className="dashboard-w-icon" />{" "}
-                    <br />
-                    <strong>
-                      <span>
-                        {Math.round(weather?.current?.pressure_in)}hPa
-                      </span>
-                    </strong>
-                    <br />
-                    <span>Pressure</span>
-                  </div>
-
-                  <div
-                    class="flex-1  p-4 text-center"
-                    style={{ color: "#464444" }}
-                  >
-                    <img src={wind} alt="" className="dashboard-w-icon" />{" "}
-                    <br />
-                    <strong>
-                      <span>{weather?.current?.uv}</span>
-                    </strong>
-                    <br />
-                    <span>UV</span>
-                  </div>
+              <div className="flex items-center justify-center">
+                <div className="grid grid-cols-7 gap-4 max-w-6xl w-full">
+                  {Array.from({ length: 7 }).map((_, index) => (
+                    <div key={index} className="p-2  rounded text-center">
+                      <span>20 &deg;</span>
+                      <img src={dailyIcon1} alt="icon" />
+                      <span className="daily-cast">11km</span>
+                      <span className="daily-cast">now</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* -------------- Market card --------------------- */}
-          <h3 className=" mb-20">Market Insights</h3>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            <div class="rounded h-70 chart-card-wrapper">
-              <div className="chart-card-one flex items-center justify-center">
-                <LineChart chartData={data1} />
+          <div
+            class="rounded h-100 chart-card-wrapper"
+            id="weather-forcast-column2"
+          >
+            <div className="daily-details">
+              <div className="grid grid-cols-5 gap-4 max-w-6xl w-full">
+                {week.map((item, index) => (
+                  <div key={index} className="p-2  rounded text-center white">
+                    <span>{item[0]}</span>
+                    <img src={item[1]} alt="icon" />
+                  </div>
+                ))}
               </div>
-              <br />
-              <h4>Production</h4>
-              <span>(+15%) increase in today’s production</span>
-              <br />
-              <br />
-              <span>updated 4 min ago</span>
-            </div>
 
-            <div class="rounded h-70 chart-card-wrapper">
-              <div className="chart-card-two flex items-center justify-center">
-                <LineChart chartData={data2} />
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "20px",
+                  color: "#fff",
+                }}
+              >
+                <img
+                  src={clock}
+                  alt="clock"
+                  style={{ display: "inline", marginRight: "10px" }}
+                />
+                <span>{moment().format("LT")} GMT </span>
               </div>
-              <br />
-              <h4>Consumption</h4>
-              <span>Last Analysis</span>
-              <br />
-              <br />
-              <span>just updated</span>
-            </div>
-          </div>
 
-          <div class=" h-48 mb-4 rounded">
-            <h3 className=" mb-6">Produce Listings</h3>
+              <h2 className="mt-4" style={{ color: "#fff" }}>
+                Temperature
+              </h2>
+              <br />
 
-            <div class="relative overflow-x-auto">
-              <table class="w-full text-sm text-left rtl:text-right">
-                <thead class="text-xs text-gray-700 uppercase">
-                  <tr>
-                    <th scope="col" class="px-6 py-3">
-                      Type
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      Price
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      Avalaibility
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="bg-white table-row">
-                    <td class="px-6 py-4">Corn</td>
-                    <td class="px-6 py-4">$500 per ton</td>
-                    <td class="px-6 py-4">100 tons</td>
-                    <td class="px-6 py-4">100 tons</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="temp-wrapper">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img src={temp3} alt="temperature" id="temp-icon" />
+                  <div>
+                    <span>Real Feel</span>
+                    <br />
+                    <span>
+                      {Math.round(weather?.current?.feelslike_c)}&deg;
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img src={temp2} alt="temperature" id="temp-icon" />
+                  <div>
+                    <span>Wind</span>
+                    <br />
+                    <span>{Math.round(weather?.current?.wind_kph)}kph</span>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img src={temp1} alt="temperature" id="temp-icon" />
+                  <div>
+                    <span>Chance of rain</span>
+                    <br />
+                    <span>{weather?.current?.cloud}%</span>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img src={temp4} alt="temperature" id="temp-icon" />
+                  <div>
+                    <span>UV index</span>
+                    <br />
+                    <span>{weather?.current?.uv}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="landImg">
+                <img src={landImg} alt="landscape" style={{ width: "100%" }} />
+              </div>
             </div>
           </div>
         </div>
@@ -513,4 +510,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default WeatherForcast;
