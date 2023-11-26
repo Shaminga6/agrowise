@@ -1,18 +1,100 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import google from "../assets/google.png"
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import google from "../assets/google.png";
+import Loader from "../components/Loader";
+import ErrorAlert from "../components/ErrorAlert";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email: "",
+    password: "",
+    re_password: "",
+  });
+
+  // -------- Redirect user if logged in -----------------
+  useEffect(() => {
+    const user = localStorage.getItem("userData");
+
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const { email, password, full_name, re_password } = formData;
+
+    try {
+      const res = await (
+        await fetch(`https://agrowise-api.vercel.app/api/auth/users/`, {
+          method: "POST",
+
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email, password, full_name, re_password }),
+        })
+      ).json();
+
+      const resLength = Object.entries(res).length;
+      if (resLength === 3) {
+        const tokenRes = await (
+          await fetch(`https://agrowise-api.vercel.app/api/auth/jwt/create/`, {
+            method: "POST",
+
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          })
+        ).json();
+
+        setIsLoading(false);
+        localStorage.setItem("userData", JSON.stringify(res));
+        localStorage.setItem("token", JSON.stringify(tokenRes));
+        navigate("/dashboard");
+      } else {
+        setIsLoading(false);
+        setShowError(true);
+        const error = Object.values(res)[0];
+        setErrorMsg(error[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <div className="min-h-screen flex items-center justify-end bg-white relative">
-        <div className="text-center login min-h-screen overflow-x-hidden rounded-r-3xl fixed top-0 bottom-0 left-0"></div>
+      {showError ? <ErrorAlert errorMsg={errorMsg} /> : ""}
 
-        <div className="login-form h-full w-full p-16 flex items-center gap-6 justify-center flex-col">
+      <div className="min-h-screen flex items-center justify-end bg-white relative max-[640px]:block">
+        <div className="text-center login min-h-screen overflow-x-hidden rounded-r-3xl fixed top-0 bottom-0 left-0 max-[640px]:hidden"></div>
+
+        <div className="max-[640px]:py-12 login-form h-full w-full  flex items-center gap-6 justify-center flex-col md:w-3/5 lg:w-1/2 xl:w-1/3">
           <h1 className="text-2xl">Get Started Now</h1>
-          <form className="w-3/5">
+          <form className="w-3/5 full-width" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2 mobile-label"
+                htmlFor="username"
+              >
                 Name
               </label>
               <input
@@ -20,11 +102,18 @@ const Signup = () => {
                 id="name"
                 type="text"
                 placeholder="Enter your name"
+                name="full_name"
+                value={formData.full_name}
+                onChange={handleChange}
+                required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2 mobile-label"
+                htmlFor="username"
+              >
                 Email address
               </label>
               <input
@@ -32,11 +121,18 @@ const Signup = () => {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2 mobile-label"
+                htmlFor="username"
+              >
                 Password
               </label>
               <input
@@ -44,11 +140,18 @@ const Signup = () => {
                 id="password"
                 type="password"
                 placeholder="Enter your password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2 mobile-label"
+                htmlFor="username"
+              >
                 Confirm Password
               </label>
               <input
@@ -56,18 +159,26 @@ const Signup = () => {
                 id="passwordConfirm"
                 type="password"
                 placeholder="Confirm your password"
+                name="re_password"
+                value={formData.re_password}
+                onChange={handleChange}
+                required
               />
             </div>
-            
+
             <div className="mb-4 flex justify-between items-center">
               <div className="flex items-center">
                 <input
                   className="mr-1 w-4 h-4"
                   type="checkbox"
                   id="rememberMe"
+                  required
                 />
                 <label className="text-xs" htmlFor="rememberMe">
-                  I agree to the <span className="underline text-black font-semibold">terms & policy</span>
+                  I agree to the{" "}
+                  <span className="underline text-black font-semibold">
+                    terms & policy
+                  </span>
                 </label>
               </div>
             </div>
@@ -76,8 +187,9 @@ const Signup = () => {
               <button
                 className="w-full bg-green-900 hover:bg-green-950 text-sm font-semibold transition ease-out text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
+                disabled={isLoading}
               >
-                Sign up
+                {isLoading ? <Loader /> : "Sign up"}
               </button>
             </div>
           </form>
@@ -85,7 +197,7 @@ const Signup = () => {
           <p className="text-xl">Or</p>
 
           <button
-            className="w-3/5 flex items-center gap-1 border border-gray-300 text-sm transition ease-out text-gray-900 py-3 px-4 rounded focus:outline-none justify-center"
+            className="w-3/5 mobile-label flex items-center gap-1 border border-gray-300 text-sm transition ease-out text-gray-900 py-3 px-4 rounded focus:outline-none justify-center"
             type="submit"
           >
             <img src={google} alt="Login with google" className="w-5" />
@@ -93,7 +205,7 @@ const Signup = () => {
           </button>
 
           <p className="flex items-center gap-1 text-sm">
-            Already have an account? 
+            Already have an account?
             <Link to="/login" className="text-orange-500 text-sm">
               Login
             </Link>
@@ -101,7 +213,7 @@ const Signup = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
