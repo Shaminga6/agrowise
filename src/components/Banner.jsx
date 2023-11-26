@@ -53,13 +53,13 @@ const Banner = () => {
           </p>
 
           <div className="banner-mobile-btn">
-            <Link to="/login">
+            <Link to="/signup">
               <button className="banner-btn" id="mobile-signup-btn">
                 Get Started
               </button>
             </Link>
 
-            <Link to={"/signup"}>
+            <Link to={"/login"}>
               <button className="banner-btn" id="banner-login-btn">
                 Login
               </button>
