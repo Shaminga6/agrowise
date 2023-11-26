@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
 import Loader from "../components/Loader";
@@ -16,6 +16,15 @@ const Signup = () => {
     password: "",
     re_password: "",
   });
+
+  // -------- Redirect user if logged in -----------------
+  useEffect(() => {
+    const user = localStorage.getItem("userData");
+
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,8 +66,8 @@ const Signup = () => {
         ).json();
 
         setIsLoading(false);
-        localStorage.setItem("userData", res);
-        localStorage.setItem("token", tokenRes);
+        localStorage.setItem("userData", JSON.stringify(res));
+        localStorage.setItem("token", JSON.stringify(tokenRes));
         navigate("/dashboard");
       } else {
         setIsLoading(false);

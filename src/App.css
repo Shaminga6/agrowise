@@ -353,6 +353,43 @@
   border-radius: 20px !important;
 }
 
+.dashboardTemp-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+}
+
+#dashboardTemp {
+  font-size: 50px;
+  font-weight: 600;
+  color: #464444;
+}
+
+#weather-desc {
+  font-size: 17px;
+  font-weight: 600;
+  color: #464444;
+  margin-top: 20px;
+  background-color: transparent;
+  text-align: center;
+}
+
+#day-icon {
+  width: 38%;
+}
+
+.sun-div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-w-icon {
+  display: inline;
+  width: 50px;
+}
+
 /* ======================= */
 @media screen and (min-width: 768px) {
   .description-div {
@@ -487,6 +524,27 @@
   .mobile-label {
     color: #fff;
   }
+
+  #dashboardTemp {
+    font-size: 37px;
+  }
+
+  #day-icon {
+    width: 32%;
+  }
+
+  .dashboardTemp-wrapper {
+    padding-top: 20px;
+    justify-content: center;
+  }
+
+  .sun-div {
+    padding-top: 0;
+  }
+
+  #dashboard-send-icon {
+    width: 11%;
+}
 }
 
 /* =================== Tablet breakpoint =========================== */

@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import avatar from "../assets/avatar1.png";
 import send from "../assets/send.png";
 import singleLogo from "../assets/singleLogo.png";
 import LineChart from "../components/LineChart";
 import { data1, data2 } from "../components/ChartData";
+import { useNavigate } from "react-router";
+import { appContext } from "../App";
+import wind from "../assets/wind.png";
+import wind1 from "../assets/wind1.png";
+import presure from "../assets/presure.png";
+import humidity from "../assets/humidity.png";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const [weather] = useContext(appContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+  // -------- Redirect user if logged in -----------------
+  useEffect(() => {
+    const user = localStorage.getItem("userData");
+
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
@@ -40,9 +58,9 @@ const Dashboard = () => {
                   ></path>
                 </svg>
               </button>
-              <a href="https://flowbite.com" className="flex ms-2 md:me-24">
+              <Link to="/">
                 <img src={logo} alt="logo" id="dashboard-logo" />
-              </a>
+              </Link>
             </div>
             <div>
               <img src={avatar} alt="logo" id="dashboard-avatar" />
@@ -352,7 +370,84 @@ const Dashboard = () => {
           </div>
 
           {/* -------------- Weather card --------------------- */}
-          <div class="flex items-center justify-center h-48 mb-10 rounded bg-gray-50 weather-card"></div>
+          <div class=" h-50 mb-10 rounded  weather-card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="dashboardTemp-wrapper p-4">
+                <span id="dashboardTemp">
+                  {weather ? Math.round(weather?.current?.temp_c) : 0}&deg;C
+                </span>
+              </div>
+              <div class=" p-4 sun-div">
+                <img
+                  src={weather?.current?.condition?.icon}
+                  alt="sun"
+                  id="day-icon"
+                />
+                <span id="weather-desc">
+                  {weather?.current?.condition?.text}
+                </span>
+              </div>
+              <div class="">
+                <div class="flex">
+                  <div
+                    class="flex-1  p-4 text-center"
+                    style={{ color: "#464444" }}
+                  >
+                    <img src={humidity} alt="" className="dashboard-w-icon" />{" "}
+                    <br />
+                    <strong>
+                      <span>{weather?.current?.humidity}%</span>
+                    </strong>
+                    <br />
+                    <span>Humidity</span>
+                  </div>
+
+                  <div
+                    class="flex-1  p-4 text-center"
+                    style={{ color: "#464444" }}
+                  >
+                    <img src={wind1} alt="" className="dashboard-w-icon" />{" "}
+                    <br />
+                    <strong>
+                      <span>{weather?.current?.cloud}km/h</span>
+                    </strong>
+                    <br />
+                    <span>Wind Speed</span>
+                  </div>
+                </div>
+
+                <div class="flex">
+                  <div
+                    class="flex-1  p-4 text-center"
+                    style={{ color: "#464444" }}
+                  >
+                    <img src={presure} alt="" className="dashboard-w-icon" />{" "}
+                    <br />
+                    <strong>
+                      <span>
+                        {Math.round(weather?.current?.pressure_in)}hPa
+                      </span>
+                    </strong>
+                    <br />
+                    <span>Pressure</span>
+                  </div>
+
+                  <div
+                    class="flex-1  p-4 text-center"
+                    style={{ color: "#464444" }}
+                  >
+                    <img src={wind} alt="" className="dashboard-w-icon" />{" "}
+                    <br />
+                    <strong>
+                      <span>{weather?.current?.uv}</span>
+                    </strong>
+                    <br />
+                    <span>UV</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* -------------- Market card --------------------- */}
           <h3 className=" mb-20">Market Insights</h3>
@@ -363,9 +458,7 @@ const Dashboard = () => {
                 <LineChart chartData={data1} />
               </div>
               <br />
-              <h4>
-                <strong>Production</strong>
-              </h4>
+              <h4>Production</h4>
               <span>(+15%) increase in today’s production</span>
               <br />
               <br />
@@ -377,9 +470,7 @@ const Dashboard = () => {
                 <LineChart chartData={data2} />
               </div>
               <br />
-              <h4>
-                <strong>Consumption</strong>
-              </h4>
+              <h4>Consumption</h4>
               <span>Last Analysis</span>
               <br />
               <br />
