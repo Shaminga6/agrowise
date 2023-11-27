@@ -10,6 +10,7 @@ import WeatherForcast from "./pages/WeatherForcast";
 import ProduceListings from "./pages/ProduceListings";
 import ProduceForm from "./pages/ProduceForm";
 import Articles from "./pages/Article";
+import Community from "./pages/Community";
 
 export const appContext = createContext();
 
@@ -76,6 +77,7 @@ function App() {
             <Route path="/producelistings" element={<ProduceListings />} />
             <Route path="/produceform" element={<ProduceForm />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/forum" element={<Community />} />
           </Routes>
         </Router>
       </appContext.Provider>

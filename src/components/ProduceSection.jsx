@@ -46,7 +46,7 @@ const ProduceSection = () => {
           {/* Second column (bigger) */}
           <div className="col-span-1 p-4 flex justify-end">
             {/* ----- selected btn wrapper--------- */}
-            <div className="selected-btn-wrapper">
+            {/* <div className="selected-btn-wrapper">
               <button
                 className="add-to-list"
                 id="selected-btn"
@@ -68,7 +68,7 @@ const ProduceSection = () => {
               >
                 Name <img src={cancle} alt="cancle" id="cancle" />
               </button>
-            </div>
+            </div> */}
 
             {/* --------- Sort btn ---------------- */}
             <button className="add-to-list" id="sort-btn">
