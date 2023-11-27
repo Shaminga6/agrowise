@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import { createContext, useEffect, useState } from "react";
 import WeatherForcast from "./pages/WeatherForcast";
 import ProduceListings from "./pages/ProduceListings";
+import ProduceForm from "./pages/ProduceForm";
 // import Forum from "./pages/Forum";
 // import CropManage from "./pages/CropManage";
 // import Articles from "./pages/Articles";
@@ -73,6 +74,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/weatherforcast" element={<WeatherForcast />} />
             <Route path="/producelistings" element={<ProduceListings />} />
+            <Route path="/produceform" element={<ProduceForm />} />
 
 
             {/* <Route path="/cropmanage" element={<CropManage />} />

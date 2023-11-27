@@ -37,7 +37,7 @@ const DashboardSection = () => {
   return (
     <>
       <div class="p-4 sm:ml-64 content-section">
-        <div class="p-4  rounded-lg mt-14">
+        <div class="p-4  rounded-lg">
           {/* ----------- AI Card --------------- */}
           <div class="flex flex-col items-center justify-center h-48 mb-8 AI-card">
             <img src={singleLogo} alt="logo" id="single-logo" />
