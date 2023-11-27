@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { appContext } from "../App";
-import NoContent from "./NoContent";
+import cancle from "../assets/cancle.png";
 
 const ProduceSection = () => {
   const [produceListings, setProduceListings] = useState([]);
@@ -33,7 +32,7 @@ const ProduceSection = () => {
   return (
     <>
       <div className="p-4 sm:ml-64">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4 flex-col-reverse sort-wrapper">
           {/* First column (smaller) */}
           <div className="col-span-1  p-4">
             <Link to="/produceform">
@@ -46,6 +45,32 @@ const ProduceSection = () => {
 
           {/* Second column (bigger) */}
           <div className="col-span-1 p-4 flex justify-end">
+            {/* ----- selected btn wrapper--------- */}
+            <div className="selected-btn-wrapper">
+              <button
+                className="add-to-list"
+                id="selected-btn"
+                style={{ width: "100px" }}
+              >
+                Type <img src={cancle} alt="cancle" id="cancle" />
+              </button>
+              <button
+                className="add-to-list"
+                id="selected-btn"
+                style={{ width: "100px" }}
+              >
+                Date <img src={cancle} alt="cancle" id="cancle" />
+              </button>
+              <button
+                className="add-to-list"
+                id="selected-btn"
+                style={{ width: "100px" }}
+              >
+                Name <img src={cancle} alt="cancle" id="cancle" />
+              </button>
+            </div>
+
+            {/* --------- Sort btn ---------------- */}
             <button className="add-to-list" id="sort-btn">
               {" "}
               &#8597; Sort by
