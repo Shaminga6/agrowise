@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import { createContext, useEffect, useState } from "react";
+import Community from "./pages/Community";
 
 export const appContext = createContext();
 
@@ -63,6 +64,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/forum" element={<Community />} />
           </Routes>
         </Router>
       </appContext.Provider>

@@ -405,7 +405,7 @@
   height: 95dvh;
 }
 .message-input {
-  background: rgba(25, 77, 4, 0.24);
+  background: rgba(25, 77, 4, 0.2);
   box-shadow: 0px 9px 12.8px 0px rgba(143, 143, 143, 0.25); 
 }
 .message-list li {
@@ -425,6 +425,18 @@
   opacity: 1;
   transform: translateX(0);
   transition: transform 0.5s ease, opacity 0.3s ease;
+}
+.rotate-up {
+  transition: transform 0.3s ease; /* Adjust the transition duration and timing function as needed */
+}
+.rotate-down {
+  transition: transform 0.3s ease; /* Adjust the transition duration and timing function as needed */
+}
+.hide-chat-history:hover .rotate-up {
+  transform: translateY(0) rotate(-25deg) translateZ(0px);
+}
+.hide-chat-history:hover .rotate-down {
+  transform: translateY(0) rotate(25deg) translateZ(0px);
 }
 
 /* ======================= */
@@ -457,9 +469,7 @@
     background: #fbfefa;
   }
   .message-input {
-    background: rgba(25, 77, 4, 0.24);
     box-shadow: 0px 9px 12.8px 0px rgba(143, 143, 143, 0.25);
-    /* >>>>>>> 396d8e168e985ca5461cb36082916d4183666ee5 */
   }
 }
 
@@ -575,7 +585,11 @@
 
   #dashboard-send-icon {
     width: 11%;
-}
+  }
+
+  .message-list li {
+    max-width: 310px;
+  }
 }
 
 /* =================== Tablet breakpoint =========================== */

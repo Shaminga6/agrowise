@@ -72,7 +72,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="18"
@@ -93,7 +93,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover  hover:bg-gray-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="18"
@@ -158,7 +158,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="23"
@@ -202,7 +202,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="23"
@@ -225,7 +225,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="23"
@@ -258,7 +258,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 className="sideIconSVG"
@@ -286,8 +286,8 @@ const Template = () => {
           </li>
           <li>
             <a
-              href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              href="/chat"
+              class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="18"
@@ -311,7 +311,7 @@ const Template = () => {
           <li>
             <a
               href="/"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
                 width="22"

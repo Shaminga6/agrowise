@@ -64,7 +64,7 @@ const Dashboard = () => {
                 <img src={logo} alt="logo" id="dashboard-logo" />
               </Link>
             </div>
-            <div>
+            <div className="flex items-center gap-2">
               <img src={avatar} alt="logo" id="dashboard-avatar" />
               <p>{user.first_name}</p>
             </div>
@@ -235,7 +235,7 @@ const Dashboard = () => {
           </li>
           <li>
             <a
-              href="/"
+              href="/forum"
               class="flex items-center p-4 text-gray-950 nav-hover hover:bg-green-600 transition ease-out dark:hover:bg-custom-green group"
             >
               <svg
