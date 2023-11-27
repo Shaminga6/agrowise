@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Admin from "./pages/Admin";
+import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import { createContext, useEffect, useState } from "react";
 import WeatherForcast from "./pages/WeatherForcast";
-// import ProduceListings from "./pages/ProduceListings";
+import ProduceListings from "./pages/ProduceListings";
 // import Forum from "./pages/Forum";
 // import CropManage from "./pages/CropManage";
 // import Articles from "./pages/Articles";
@@ -27,6 +27,7 @@ function App() {
             const { latitude, longitude } = position.coords;
             const apiUrl =
               "https://weatherapi-com.p.rapidapi.com/forecast.json";
+
 
             const response = await fetch(
               `${apiUrl}?q=${latitude},${longitude}`,
@@ -68,14 +69,17 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/weatherforcast" element={<WeatherForcast />} />
-            {/* <Route path="/producelist" element={<ProduceListings />} />
-            <Route path="/cropmanage" element={<CropManage />} />
+            <Route path="/producelistings" element={<ProduceListings />} />
+
+
+            {/* <Route path="/cropmanage" element={<CropManage />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/settings" element={<Settings />} /> */}
+
           </Routes>
         </Router>
       </appContext.Provider>

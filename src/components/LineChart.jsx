@@ -32,3 +32,4 @@ const LineChart = ({ chartData }) => {
 };
 
 export default LineChart;
+

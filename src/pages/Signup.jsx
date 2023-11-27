@@ -24,7 +24,7 @@ const Signup = () => {
     if (user) {
       navigate("/dashboard");
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,10 +84,10 @@ const Signup = () => {
     <>
       {showError ? <ErrorAlert errorMsg={errorMsg} /> : ""}
 
-      <div className="min-h-screen flex items-center justify-end bg-white relative">
-        <div className="text-center login min-h-screen overflow-x-hidden rounded-r-3xl fixed top-0 bottom-0 left-0"></div>
+      <div className="min-h-screen flex items-center justify-end bg-white relative max-[640px]:block">
+        <div className="text-center login min-h-screen overflow-x-hidden rounded-r-3xl fixed top-0 bottom-0 left-0 max-[640px]:hidden"></div>
 
-        <div className="login-form h-full w-full p-16 flex items-center gap-6 justify-center flex-col">
+        <div className="max-[640px]:py-12 login-form h-full w-full  flex items-center gap-6 justify-center flex-col md:w-3/5 lg:w-1/2 xl:w-1/3">
           <h1 className="text-2xl">Get Started Now</h1>
           <form className="w-3/5 full-width" onSubmit={handleSubmit}>
             <div className="mb-4">

@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import logo from "../assets/logo.png";
 import avatar from "../assets/avatar1.png";
+import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+const Template = () => {
+  const navigate = useNavigate();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+  const user = JSON.parse(localStorage.getItem("userData")) || {};
+
+  // -------- Redirect user if logged in -----------------
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+
+    if (!userData) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -36,6 +50,7 @@ const Dashboard = () => {
                   ></path>
                 </svg>
               </button>
+
               <Link to="/">
                 <img src={logo} alt="logo" id="dashboard-logo" />
               </Link>
@@ -56,8 +71,8 @@ const Dashboard = () => {
       >
         <ul class="space-y-2">
           <li>
-            <a
-              href="#"
+            <Link
+              to="/dashboard"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -74,11 +89,11 @@ const Dashboard = () => {
               </svg>
 
               <span class="ms-3">Overview</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/weatherforcast"
               class="flex items-center p-4 text-gray-900 nav-hover  hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -139,7 +154,7 @@ const Dashboard = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Weather Forcast</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -186,8 +201,8 @@ const Dashboard = () => {
             </a>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/producelistings"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -206,7 +221,7 @@ const Dashboard = () => {
               <span class="flex-1 ms-3 whitespace-nowrap">
                 Produce listings
               </span>
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -271,8 +286,8 @@ const Dashboard = () => {
             </a>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/chat"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -292,7 +307,7 @@ const Dashboard = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Chatbot</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -330,13 +345,9 @@ const Dashboard = () => {
         </ul>
       </aside>
 
-      <div className="p-4 sm:ml-64">
-
-        {/* Write your code here */}
-        
-      </div>
+      <div className="p-4 sm:ml-64">{/* Write your code here */}</div>
     </>
   );
 };
 
-export default Dashboard;
+export default Template;
