@@ -9,6 +9,10 @@ const Banner = () => {
     navigate("/login");
   };
 
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+
   return (
     <>
       <div className="relative banner-wrapper">
@@ -31,11 +35,17 @@ const Banner = () => {
 
           <div className="banner-btn-wrapper">
             <Link to="/signup">
-              <button className="banner-btn">Get Started</button>
+              <button className="banner-btn" onClick={handleSignup}>
+                Get Started
+              </button>
             </Link>
 
             <Link to="/login">
-              <button className="banner-btn" id="banner-login-btn">
+              <button
+                className="banner-btn"
+                id="banner-login-btn"
+                onClick={handleLogin}
+              >
                 Login
               </button>
             </Link>
