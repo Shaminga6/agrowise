@@ -16,7 +16,109 @@ const ViewPosts = () => {
   const [isCommunity, setCommunity] = useState(false);
   const [isBookmark, setBookmark] = useState(false);
   const [isThread, setThread] = useState(false);
+  const [createComm, setCreateComm] = useState('');
+  const [comment, setComment] = useState(Array(posts.length).fill(false));
   const [isOptionsOpen, setOptionsOpen] = useState(Array(posts.length).fill(false));
+  const [communities, setCommunities] = useState([]);
+
+  useEffect(() => {
+    // Fetch chat history when the component mounts
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    fetch("https://agrowise-api.vercel.app/api/communities/", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token.access}`
+      }
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      const fetchedData = data.results;
+      setCommunities(fetchedData);
+    })
+    .catch(error => {
+      console.error('Error fetching chat history:', error);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Fetch chat history when the component mounts
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    fetch("https://agrowise-api.vercel.app/api/communities/me/", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token.access}`
+      }
+    })
+    .then(response => {
+      console.log("Response:", response);
+      return response.json();
+    })
+    .then(data => {
+      const fetchedData = data;
+      console.log(fetchedData);
+    })
+    .catch(error => {
+      console.error('Error fetching Communities:', error);
+    });
+  }, []);
+
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setCreateComm(value);
+  };
+
+  const handleCreateComm = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+  
+    fetch(`https://agrowise-api.vercel.app/api/communities/me/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token.access}`,
+      },
+      body: JSON.stringify({
+        name: createComm,
+        about: "A community created for interaction"
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response or perform any necessary actions
+      console.log("Community created successfully", data);
+    })
+    .catch(error => {
+      console.error('Error creating community:', error);
+    });
+  }
+
+  const handleJoinComm = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const slug = document.getElementById("community-option").value;
+  
+    fetch(`https://agrowise-api.vercel.app/api/communities/${slug}/join/`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token.access}`,
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response or perform any necessary actions
+      console.log("Community created successfully", data);
+    })
+    .catch(error => {
+      console.error('Error creating community:', error);
+    });
+  }
 
   const toggleOptions = (index) => {
     setOptionsOpen((prevOptions) => {
@@ -33,6 +135,13 @@ const ViewPosts = () => {
   }
   const toggleThreads = () => {
     setThread(!isThread);
+  }
+  const handleComment = (index) => {
+    setComment((prevComment) => {
+      const updatedComment = [...prevComment];
+      updatedComment[index] = !updatedComment[index];
+      return updatedComment;
+    });
   }
   const user = JSON.parse(localStorage.getItem("userData")) || {};
   
@@ -58,9 +167,9 @@ const ViewPosts = () => {
 
   return (
     <>
-      <div className="min-h-screen flex bg-white gap-4 rounded-lg border border-slate-300 mx-4">
+      <div className="min-h-screen flex max-[640px]:flex-col-reverse bg-white gap-4 rounded-lg border border-slate-300 mx-4 max-sm:mx-0 max-sm:rounded-none">
         {/* History */}
-        <div className='w-60 bg-slate-200'>
+        <div className='w-60 bg-slate-200 max-sm:w-full'>
           <ul className='text-sm text-green-800 py-4'>
             <li className={`mb-2 w-full  px-4 py-2 ${isBookmark ? "bg-slate-300" : ""} cursor-pointer`} onClick={toggleBookmarks}>Bookmarks</li>
             <ul className={`bg-slate-200 w-max text-xs ml-4 ${isBookmark ? "block" : "hidden"}`}>
@@ -91,21 +200,40 @@ const ViewPosts = () => {
               <li className='rounded-lg my-4 px-3 py-2 font-light' style={{ background: "#FFE0B2" }}>Ploughshare Society</li>
             </ul>
           </ul>
+
+          <form  onSubmit={handleCreateComm} className='mx-2 flex items-center gap-2 flex-col text-xs'>
+            <input type="text"
+              className='border outline-none border-slate-400 rounded-lg p-2' placeholder='Community name' 
+              value={createComm}
+              onChange={handleChange} required
+            />
+            <button type='submit' className='bg-green-700 text-white text-xs rounded-lg p-2' onClick={handleCreateComm}>+ Create new community</button>
+          </form> <br />
+
+          <form className='mx-2 flex items-center gap-2 flex-col text-xs'>
+            <select name="" id="" className='border border-slate-400 rounded-lg p-2'>
+              <option value="">-- join a new community --</option>
+              {communities.map((community, index) => (
+                <option key={community.id} id='community-option' value={community.slug} className='my-2 text-xs'>{community.name}</option>
+              ))}
+            </select>
+            <button className='bg-green-700 text-white text-xs rounded-lg p-2' onClick={handleJoinComm}>+ Join a new community</button>
+          </form>
         </div>
 
         {/* Topics */}
-        <div className='w-full p-6'>
+        <div className='w-full p-6 max-sm:p-2'>
           {posts.map((post, index) => (
             <>
-              <div key={post.id} className="flex flex-col gap-3 mb-4 forum shadow-xl p-6 rounded-lg">
+              <div key={post.id} className="flex flex-col gap-3 mb-4 forum shadow-xl p-6 max-sm:p-4 rounded-lg">
                 <div className="text-xs flex gap-2 items-center justify-between">
-                  <div className="flex gap-2 items-center">
-                    <img src={avatar} alt="" className='w-7' />
-                    <p>{user.first_name}</p>
+                  <div className="flex gap-2 items-center max-sm:gap-1">
+                    <img src={avatar} alt="" className='w-7 max-sm:w-5' />
+                    <p className='max-sm:text-xs'>{user.first_name}</p>
                   </div>
                   <div className="flex items-center gap-4">
-                    <p className='px-2 py-1 rounded-md font-thin' style={{ background: "#FFE0B2" }}>{post.community}</p>
-                    <div className="flex gap-1 items-center">
+                    <p className='px-2 py-1 rounded-md font-thin max-sm:text-xs' style={{ background: "#FFE0B2" }}>{post.community}</p>
+                    <div className="flex gap-1 items-center max-sm:hidden">
                       <img src={time} alt="" />
                       1 hour ago
                     </div>
@@ -165,7 +293,7 @@ const ViewPosts = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                      <p className='font-light'>202 Views</p>
+                      <p className='font-light flex gap-1'>202 <span className='max-sm:hidden'>Views</span></p>
                     </div>
                     <div className="flex gap-1 items-center">
                       <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,9 +306,9 @@ const ViewPosts = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                      <p className='font-light'>98 Comments</p>
+                      <p className='font-light flex gap-1'>98 <span className='max-sm:hidden'>Comments</span></p>
                     </div>
-                    <div className='flex items-center gap-1'>
+                    <button className='flex items-center gap-1' onClick={() => handleComment(index)}>
                       <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_324_201)">
                           <path d="M16.2568 16.875C16.1567 16.8763 16.0581 16.851 15.9711 16.8016C15.8841 16.7521 15.8118 16.6804 15.7618 16.5937C15.0126 15.3175 13.9448 14.2577 12.663 13.5181C11.3811 12.7786 9.92916 12.3847 8.44931 12.375V15.75C8.44875 15.861 8.41534 15.9694 8.35328 16.0615C8.29121 16.1536 8.20328 16.2253 8.10056 16.2675C7.99812 16.3105 7.88522 16.3223 7.7761 16.3013C7.66698 16.2803 7.56653 16.2274 7.48743 16.1493L0.737431 9.39933C0.684709 9.34704 0.642862 9.28483 0.614305 9.21628C0.585748 9.14773 0.571045 9.07421 0.571045 8.99996C0.571045 8.9257 0.585748 8.85218 0.614305 8.78363C0.642862 8.71509 0.684709 8.65287 0.737431 8.60058L7.48743 1.85058C7.56653 1.77253 7.66698 1.71966 7.7761 1.69863C7.88522 1.67761 7.99812 1.68938 8.10056 1.73246C8.20328 1.77466 8.29121 1.84632 8.35328 1.93841C8.41534 2.0305 8.44875 2.1389 8.44931 2.24996V5.68683C10.7765 5.98574 12.9156 7.12062 14.4679 8.87995C16.0203 10.6393 16.88 12.9031 16.8868 15.2493C16.8855 15.6255 16.8611 16.0012 16.8137 16.3743C16.7996 16.4914 16.7492 16.601 16.6694 16.6878C16.5897 16.7746 16.4847 16.8342 16.3693 16.8581L16.2568 16.875ZM8.16806 11.25C9.60266 11.2294 11.0246 11.5205 12.3357 12.1032C13.6468 12.6859 14.8158 13.5463 15.7618 14.625C15.5926 12.5844 14.7018 10.6709 13.2494 9.22776C11.7969 7.78457 9.87776 6.90611 7.83618 6.74996C7.69594 6.73728 7.56555 6.67247 7.47077 6.56832C7.376 6.46418 7.32374 6.32827 7.32431 6.18746V3.60558L1.92993 8.99996L7.32431 14.3943V11.8125C7.32431 11.6633 7.38357 11.5202 7.48906 11.4147C7.59455 11.3092 7.73762 11.25 7.88681 11.25H8.19056H8.16806Z" fill="#216206"/>
@@ -191,10 +319,17 @@ const ViewPosts = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                      <p className='text-green-800'>Reply</p>
-                    </div>
+                      <span className='text-green-800'>Reply</span>
+                    </button>
                   </div>
                 </div>
+
+                {comment[index] && (
+                  <form className={`comment gap-2 flex-col ${comment[index] ? "flex" : "hidden"}`}>
+                    <textarea name="" id="" cols="30" rows="3" className='font-light border border-slate-300 rounded-lg outline-none resize-none w-full text-sm p-2'></textarea>
+                    <button className='text-sm bg-green-900 self-end text-white rounded-lg px-4 py-1'>Reply</button>
+                  </form>
+                )}
               </div>
             </>
           ))}

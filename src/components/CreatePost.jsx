@@ -35,7 +35,7 @@ const CreatePost = () => {
   return (
     <>
       <div className="flex bg-white rounded-lg shadow-lg p-4 m-4">
-        <form onSubmit={handleSubmit} className='flex w-full gap-2 items-center justify-between py-3 px-6'>
+        <form onSubmit={handleSubmit} className={`flex w-full gap-2 items-center justify-between py-3 px-6 max-[640px]:px-0 max-sm:flex-col`}>
           <textarea name="" id="" cols="30" rows="3" 
             className='border border-gray-400 font-light text-sm p-2 resize-none rounded-lg w-full max-w-lg outline-none' 
             placeholder='Write something here...' onChange={handleChange}>{message}</textarea>

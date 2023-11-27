@@ -71,7 +71,7 @@ const Template = () => {
         <ul class="space-y-2">
           <li>
             <a
-              href="/"
+              href="/dashboard"
               class="flex items-center p-4 text-gray-900 nav-hover transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
@@ -224,7 +224,7 @@ const Template = () => {
           </li>
           <li>
             <a
-              href="/"
+              href="/forum"
               class="flex items-center p-4 text-gray-900 nav-hover  transition ease-in-out hover:bg-green-800 dark:hover:bg-custom-green group"
             >
               <svg
