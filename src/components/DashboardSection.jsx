@@ -13,17 +13,19 @@ import wind from "../assets/wind.png";
 import wind1 from "../assets/wind1.png";
 import presure from "../assets/presure.png";
 import humidity from "../assets/humidity.png";
+import NoContent from "./NoContent";
 
 const DashboardSection = () => {
   const navigate = useNavigate();
   const [weather] = useContext(appContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [produceListings, setProduceListings] = useState([]);
+  const user = JSON.parse(localStorage.getItem("userData")) || {};
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
-
-  const user = JSON.parse(localStorage.getItem("userData")) || {};
 
   // -------- Redirect user if logged in -----------------
   useEffect(() => {
@@ -33,6 +35,29 @@ const DashboardSection = () => {
       navigate("/login");
     }
   }, [navigate]);
+
+  // ---------- Handle Fetch Produce --------------------
+  useEffect(() => {
+    const handleFetchProduce = async () => {
+      try {
+        const res = await (
+          await fetch(`https://agrowise-api.vercel.app/api/produce-listings/`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token.access}`,
+              "Content-Type": "application/json; charset=UTF-8",
+            },
+          })
+        ).json();
+
+        setProduceListings(res?.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    handleFetchProduce();
+  }, []);
 
   return (
     <>
@@ -188,12 +213,18 @@ const DashboardSection = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="bg-white table-row">
-                    <td class="px-6 py-4">Corn</td>
-                    <td class="px-6 py-4">$500 per ton</td>
-                    <td class="px-6 py-4">100 tons</td>
-                    <td class="px-6 py-4">100 tons</td>
-                  </tr>
+                  {produceListings
+                    ? produceListings?.map(
+                        ({ type, availability, price, description }) => (
+                          <tr class="table-row">
+                            <td class="px-6 py-4">{type}</td>
+                            <td class="px-6 py-4">{availability}</td>
+                            <td class="px-6 py-4">{price}</td>
+                            <td class="px-6 py-4">{description}</td>
+                          </tr>
+                        )
+                      )
+                    : ""}
                 </tbody>
               </table>
             </div>

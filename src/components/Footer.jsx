@@ -19,8 +19,7 @@ const Footer = () => {
               </strong>
               <ul className="quick-link">
                 <li>Home</li>
-                <li>Crop</li>
-                <li>Management</li>
+                <li>Crop Management</li>
                 <li>Market insights</li>
                 <li>Community forum</li>
                 <li>Weather forcast</li>

@@ -1,10 +1,38 @@
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import cancle from "../assets/cancle.png";
 
 const ProduceSection = () => {
+  const [produceListings, setProduceListings] = useState([]);
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  // ---------- Handle Fetch Produce --------------------
+  useEffect(() => {
+    const handleFetchProduce = async () => {
+      try {
+        const res = await (
+          await fetch(`https://agrowise-api.vercel.app/api/produce-listings/`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token.access}`,
+              "Content-Type": "application/json; charset=UTF-8",
+            },
+          })
+        ).json();
+
+        setProduceListings(res?.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    handleFetchProduce();
+  }, []);
+
   return (
     <>
       <div className="p-4 sm:ml-64">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4 flex-col-reverse sort-wrapper">
           {/* First column (smaller) */}
           <div className="col-span-1  p-4">
             <Link to="/produceform">
@@ -17,6 +45,32 @@ const ProduceSection = () => {
 
           {/* Second column (bigger) */}
           <div className="col-span-1 p-4 flex justify-end">
+            {/* ----- selected btn wrapper--------- */}
+            {/* <div className="selected-btn-wrapper">
+              <button
+                className="add-to-list"
+                id="selected-btn"
+                style={{ width: "100px" }}
+              >
+                Type <img src={cancle} alt="cancle" id="cancle" />
+              </button>
+              <button
+                className="add-to-list"
+                id="selected-btn"
+                style={{ width: "100px" }}
+              >
+                Date <img src={cancle} alt="cancle" id="cancle" />
+              </button>
+              <button
+                className="add-to-list"
+                id="selected-btn"
+                style={{ width: "100px" }}
+              >
+                Name <img src={cancle} alt="cancle" id="cancle" />
+              </button>
+            </div> */}
+
+            {/* --------- Sort btn ---------------- */}
             <button className="add-to-list" id="sort-btn">
               {" "}
               &#8597; Sort by
@@ -44,12 +98,18 @@ const ProduceSection = () => {
               </tr>
             </thead>
             <tbody>
-              <tr class="table-row">
-                <td class="px-6 py-4">Corn</td>
-                <td class="px-6 py-4">$500 per ton</td>
-                <td class="px-6 py-4">100 tons</td>
-                <td class="px-6 py-4">100 tons</td>
-              </tr>
+              {produceListings.length !== 0
+                ? produceListings.map(
+                    ({ type, availability, price, description }) => (
+                      <tr class="table-row">
+                        <td class="px-6 py-4">{type}</td>
+                        <td class="px-6 py-4">{availability}</td>
+                        <td class="px-6 py-4">{price}</td>
+                        <td class="px-6 py-4">{description}</td>
+                      </tr>
+                    )
+                  )
+                : ""}
             </tbody>
           </table>
         </div>

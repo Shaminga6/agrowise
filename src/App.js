@@ -9,16 +9,18 @@ import { createContext, useEffect, useState } from "react";
 import WeatherForcast from "./pages/WeatherForcast";
 import ProduceListings from "./pages/ProduceListings";
 import ProduceForm from "./pages/ProduceForm";
-// import Forum from "./pages/Forum";
-// import CropManage from "./pages/CropManage";
-// import Articles from "./pages/Articles";
-// import Settings from "./pages/Settings";
+import Articles from "./pages/Article";
+import Community from "./pages/Community";
 
 export const appContext = createContext();
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weather, setWeatherData] = useState(null);
+  const [produceListings, setProduceListings] = useState([]);
 
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  // ---------- Handle Weather --------------------
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +30,6 @@ function App() {
             const { latitude, longitude } = position.coords;
             const apiUrl =
               "https://weatherapi-com.p.rapidapi.com/forecast.json";
-
 
             const response = await fetch(
               `${apiUrl}?q=${latitude},${longitude}`,
@@ -60,7 +61,7 @@ function App() {
     fetchData();
   }, []);
 
-  const appState = [weatherData];
+  const appState = [weather, produceListings];
 
   return (
     <div className="App">
@@ -75,13 +76,8 @@ function App() {
             <Route path="/weatherforcast" element={<WeatherForcast />} />
             <Route path="/producelistings" element={<ProduceListings />} />
             <Route path="/produceform" element={<ProduceForm />} />
-
-
-            {/* <Route path="/cropmanage" element={<CropManage />} />
-            <Route path="/forum" element={<Forum />} />
             <Route path="/articles" element={<Articles />} />
-            <Route path="/settings" element={<Settings />} /> */}
-
+            <Route path="/forum" element={<Community />} />
           </Routes>
         </Router>
       </appContext.Provider>

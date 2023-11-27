@@ -21,7 +21,7 @@ import moment from "moment/moment";
 
 const WeatherSection = () => {
   const navigate = useNavigate();
-  const [weather] = useContext(appContext);
+  const [weather, produceListings] = useContext(appContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {

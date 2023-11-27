@@ -357,6 +357,7 @@
 .table-row {
   border: none !important;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .table-row::after {
@@ -706,6 +707,33 @@
   background-color: transparent;
 }
 
+.selected-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#selected-btn {
+  all: unset;
+  width: 70px !important;
+  border: 1px solid #216206;
+  color: #216206;
+  background-color: transparent;
+  position: relative;
+  padding: 0 8px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* #cancle{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+} */
+
 /* ============ Produce Form ============================ */
 .produce-form-wrapper {
   margin-top: 30px;
@@ -727,8 +755,31 @@
   outline: none;
 }
 
-.produce-input::placeholder{
+.produce-input::placeholder {
   font-weight: 100;
+}
+/* ============ Article ================== */
+
+.article-card {
+  box-shadow: 0px 4px 5px 0px #bfbfbf;
+  color: gray;
+}
+
+#article-img {
+  border-radius: 20px;
+}
+
+.article-action-wrapper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#article-title {
+  font-weight: 800;
+  font-size: 29px;
+  padding: 10px 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -762,7 +813,6 @@
   .message-input {
     background: rgba(25, 77, 4, 0.24);
     box-shadow: 0px 9px 12.8px 0px rgba(143, 143, 143, 0.25);
-    /* >>>>>>> 396d8e168e985ca5461cb36082916d4183666ee5 */
   }
 }
 
@@ -909,16 +959,24 @@
     margin-top: 30px;
   }
 
-
   .produce-form {
     width: 100%;
     margin: 0 20px;
   }
+
+  .article-card {
+    margin-top: 25px;
+  }
+
+  .sort-wrapper {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  #add-btn {
+    width: 100%;
+  }
 }
-
-
-
-
 
 /* =================== Tablet breakpoint =========================== */
 @media screen and (min-width: 768px) and (max-width: 890px) {

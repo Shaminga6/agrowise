@@ -230,8 +230,8 @@ const Template = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/forum"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -260,11 +260,11 @@ const Template = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Community forum</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/articles"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -289,7 +289,7 @@ const Template = () => {
                 />
               </svg>
               <span class="flex-1 ms-3 whitespace-nowrap">Articles</span>
-            </a>
+            </Link>
           </li>
           <li>
             <Link

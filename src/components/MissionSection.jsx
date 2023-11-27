@@ -10,7 +10,7 @@ const MissionSection = () => {
     <>
       <div class="m-0 sm:m-20 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class=" mission-section-wrapper col-span-1  p-4">
-          <h3 id="mission-title">Our Mission Is To</h3>
+          <h3 id="mission-title">Our Mission</h3>
           <p>
             Revolutionize the agricultural sector by empowering farmers with
             cutting-edge technology. We are dedicated to developing a
