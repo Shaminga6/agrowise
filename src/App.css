@@ -357,6 +357,7 @@
 .table-row {
   border: none !important;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .table-row::after {

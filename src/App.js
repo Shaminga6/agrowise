@@ -9,16 +9,40 @@ import { createContext, useEffect, useState } from "react";
 import WeatherForcast from "./pages/WeatherForcast";
 import ProduceListings from "./pages/ProduceListings";
 import ProduceForm from "./pages/ProduceForm";
-// import Forum from "./pages/Forum";
-// import CropManage from "./pages/CropManage";
-// import Articles from "./pages/Articles";
-// import Settings from "./pages/Settings";
 
 export const appContext = createContext();
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weather, setWeatherData] = useState(null);
+  const [produceListings, setProduceListings] = useState([]);
 
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  // ---------- Handle Fetch Produce --------------------
+  useEffect(() => {
+    const handleFetchProduce = async () => {
+      try {
+        const res = await (
+          await fetch(`https://agrowise-api.vercel.app/api/produce-listings/`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token.access}`,
+              "Content-Type": "application/json; charset=UTF-8",
+            },
+          })
+        ).json();
+
+        setProduceListings(res?.results);
+        localStorage.setItem(JSON.stringify(res.results))
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    handleFetchProduce();
+  }, []);
+
+  // ---------- Handle Weather --------------------
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +52,6 @@ function App() {
             const { latitude, longitude } = position.coords;
             const apiUrl =
               "https://weatherapi-com.p.rapidapi.com/forecast.json";
-
 
             const response = await fetch(
               `${apiUrl}?q=${latitude},${longitude}`,
@@ -60,7 +83,7 @@ function App() {
     fetchData();
   }, []);
 
-  const appState = [weatherData];
+  const appState = [weather, produceListings];
 
   return (
     <div className="App">
@@ -75,13 +98,6 @@ function App() {
             <Route path="/weatherforcast" element={<WeatherForcast />} />
             <Route path="/producelistings" element={<ProduceListings />} />
             <Route path="/produceform" element={<ProduceForm />} />
-
-
-            {/* <Route path="/cropmanage" element={<CropManage />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/settings" element={<Settings />} /> */}
-
           </Routes>
         </Router>
       </appContext.Provider>
