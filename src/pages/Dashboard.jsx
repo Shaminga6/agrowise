@@ -58,6 +58,7 @@ const Dashboard = () => {
                   ></path>
                 </svg>
               </button>
+
               <Link to="/">
                 <img src={logo} alt="logo" id="dashboard-logo" />
               </Link>
@@ -78,7 +79,10 @@ const Dashboard = () => {
       >
         <ul class="space-y-2">
           <li>
-            <Link class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group">
+            <Link
+              to="/dashboard"
+              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group"
+            >
               <svg
                 width="18"
                 height="18"
@@ -161,8 +165,8 @@ const Dashboard = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/cropmanage"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -202,11 +206,11 @@ const Dashboard = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Crop managment</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/producelist"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -225,11 +229,11 @@ const Dashboard = () => {
               <span class="flex-1 ms-3 whitespace-nowrap">
                 Produce listings
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/forum"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -258,11 +262,11 @@ const Dashboard = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Community forum</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/articles"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -287,7 +291,7 @@ const Dashboard = () => {
                 />
               </svg>
               <span class="flex-1 ms-3 whitespace-nowrap">Articles</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -314,8 +318,8 @@ const Dashboard = () => {
             </a>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/settings"
               class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
             >
               <svg
@@ -344,7 +348,7 @@ const Dashboard = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Settings</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </aside>

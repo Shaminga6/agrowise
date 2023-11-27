@@ -7,6 +7,11 @@ import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 import { createContext, useEffect, useState } from "react";
 import WeatherForcast from "./pages/WeatherForcast";
+// import ProduceListings from "./pages/ProduceListings";
+// import Forum from "./pages/Forum";
+// import CropManage from "./pages/CropManage";
+// import Articles from "./pages/Articles";
+// import Settings from "./pages/Settings";
 
 export const appContext = createContext();
 
@@ -20,7 +25,8 @@ function App() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(async (position) => {
             const { latitude, longitude } = position.coords;
-            const apiUrl = "https://weatherapi-com.p.rapidapi.com/forecast.json";
+            const apiUrl =
+              "https://weatherapi-com.p.rapidapi.com/forecast.json";
 
             const response = await fetch(
               `${apiUrl}?q=${latitude},${longitude}`,
@@ -65,6 +71,11 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/weatherforcast" element={<WeatherForcast />} />
+            {/* <Route path="/producelist" element={<ProduceListings />} />
+            <Route path="/cropmanage" element={<CropManage />} />
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/settings" element={<Settings />} /> */}
           </Routes>
         </Router>
       </appContext.Provider>
