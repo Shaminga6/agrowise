@@ -23,9 +23,15 @@ const Template = () => {
     }
   }, [navigate]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full bg-white ">
+      <nav className="fixed top-0 z-50 w-full bg-white top-nav">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -64,7 +70,7 @@ const Template = () => {
 
       <aside
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
+        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20  aside transition-transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } bg-white sm:translate-x-0 dark:border-gray-700`}
         aria-label="Sidebar"
@@ -309,6 +315,7 @@ const Template = () => {
               <span class="flex-1 ms-3 whitespace-nowrap">Chatbot</span>
             </Link>
           </li>
+
           <li>
             <a
               href="#"
@@ -342,10 +349,20 @@ const Template = () => {
               <span class="flex-1 ms-3 whitespace-nowrap">Settings</span>
             </a>
           </li>
+          {/* -------------- */}
+          <li>
+            <span
+              onClick={handleLogout}
+              class="flex-1 ms-3 whitespace-nowrap"
+              style={{ color: "#eb4646", cursor: "pointer" }}
+            >
+              Logout
+            </span>
+          </li>
         </ul>
       </aside>
 
-      <div className="p-4 sm:ml-64">{/* Write your code here */}</div>
+      <div className="p-4 sm:ml-64">Write your code here</div>
     </>
   );
 };

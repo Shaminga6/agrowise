@@ -38,7 +38,7 @@ const WeatherSection = () => {
 
   return (
     <>
-      <div className="p-4 sm:ml-64 mt-14">
+      <div className="p-4 sm:ml-64">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
           <div class="rounded h-70 chart-card-wrapper location">
             <div style={{ display: "flex", alignItems: "center" }}>
