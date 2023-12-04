@@ -232,23 +232,38 @@
   box-shadow: 1px 0px 3px #dfdcdc;
 }
 
+#side-link-state {
+  display: flex;
+  align-items: center;
+  color: rgb(102, 102, 102);
+  padding: 1rem;
+}
+
+#side-link-state:hover {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: #fff;
+  background-color: #216206;
+}
+
+#side-link-state:hover path {
+  fill: #fff;
+}
+
+.active {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: #fff !important;
+  background-color: #216206;
+}
+
+.active path {
+  fill: #fff !important;
+}
+
 /*================== Dashboard =========================== */
 .content-section {
   background-color: #fbfefa;
-}
-
-.nav-hover {
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  color: rgb(107, 107, 107);
-}
-
-.nav-hover:hover {
-  color: #fff;
-}
-
-.nav-hover:hover path {
-  fill: #fff;
 }
 
 #dashboard-avatar {

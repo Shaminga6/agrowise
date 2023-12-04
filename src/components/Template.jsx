@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import logo from "../assets/logo.png";
 import avatar from "../assets/avatar1.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Template = () => {
   const navigate = useNavigate();
@@ -77,9 +77,12 @@ const Template = () => {
       >
         <ul class="space-y-2">
           <li>
-            <Link
+            <NavLink
               to="/dashboard"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-green-100 dark:hover:bg-custom-green group"
+              id="side-link-state"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
             >
               <svg
                 width="18"
@@ -95,12 +98,15 @@ const Template = () => {
               </svg>
 
               <span class="ms-3">Overview</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/weatherforcast"
-              class="flex items-center p-4 text-gray-900 nav-hover  hover:bg-gray-100 dark:hover:bg-custom-green group"
+              id="side-link-state"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
             >
               <svg
                 width="18"
@@ -160,7 +166,7 @@ const Template = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Weather Forcast</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
             <a
@@ -207,9 +213,12 @@ const Template = () => {
             </a>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/producelistings"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              id="side-link-state"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
             >
               <svg
                 width="23"
@@ -227,12 +236,15 @@ const Template = () => {
               <span class="flex-1 ms-3 whitespace-nowrap">
                 Produce listings
               </span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/forum"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              id="side-link-state"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
             >
               <svg
                 width="23"
@@ -260,12 +272,15 @@ const Template = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Community forum</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/articles"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              id="side-link-state"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
             >
               <svg
                 className="sideIconSVG"
@@ -289,12 +304,15 @@ const Template = () => {
                 />
               </svg>
               <span class="flex-1 ms-3 whitespace-nowrap">Articles</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/chat"
-              class="flex items-center p-4 text-gray-900 nav-hover   hover:bg-gray-100 dark:hover:bg-custom-green group"
+              id="side-link-state"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
             >
               <svg
                 width="18"
@@ -313,7 +331,7 @@ const Template = () => {
               </svg>
 
               <span class="flex-1 ms-3 whitespace-nowrap">Chatbot</span>
-            </Link>
+            </NavLink>
           </li>
 
           <li>
