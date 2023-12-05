@@ -1017,6 +1017,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 49px;
+    flex-direction: column;
   }
 
   .content-section {

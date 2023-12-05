@@ -4,6 +4,7 @@ import avatar from "../assets/avatar.png";
 import time from "../assets/time.png";
 import option from "../assets/options.png";
 import Loader from "../components/Loader";
+import berryMenu from "../assets/berryMenu.png";
 
 const ViewPosts = () => {
   const posts = [
@@ -45,7 +46,7 @@ const ViewPosts = () => {
   const [communities, setCommunities] = useState([]);
   const [isCreating, setIsCreating] = useState(false);
   const [isJoining, setIsJoining] = useState(false);
-  const [openMenu, setOpenMenu] = useState(true);
+  const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     // Fetch chat history when the component mounts
@@ -204,10 +205,15 @@ const ViewPosts = () => {
       <div className="option-btn-wrapper">
         <button
           type="submit"
-          className="bg-gray-600 text-white text-xs rounded-lg p-2 block sm:hidden"
+          className="bg-gray-600 text-white text-xs rounded-lg p-2 block sm:hidden w-24 h-8 flex items-center justify-around"
           style={{ width: "95px", height: "32px" }}
           onClick={toggleMenu}
         >
+          <img
+            src={berryMenu}
+            alt="menu"
+            style={{ width: "17px", borderRadius: "5px" }}
+          />{" "}
           Options
         </button>
       </div>
@@ -216,7 +222,7 @@ const ViewPosts = () => {
         {/* History */}
         <div
           className={`w-60 bg-slate-200 max-sm:w-full mobile-tab ${
-            openMenu ? "block" : "hide"
+            openMenu ? "" : "hide"
           }`}
         >
           <ul className="text-sm text-green-800 py-4">
@@ -372,18 +378,18 @@ const ViewPosts = () => {
               <button
                 type="submit"
                 className="bg-green-700 text-white text-xs rounded-lg p-2"
-                style={{ width: "167px", height: "32px" }}
+                style={{ width: "100%", height: "32px" }}
                 onClick={handleCreateComm}
               >
                 {isCreating ? <Loader /> : "+ Create new community"}
               </button>
             </form>{" "}
             <br />
-            <form className="mx-2 flex items-center gap-2 flex-col text-xs">
+            <form className="mx-2 flex items-center gap-2 flex-col text-xs ">
               <select
                 name=""
                 id=""
-                className="border border-slate-400 rounded-lg p-2"
+                className="border border-slate-400 rounded-lg p-2 w-full"
               >
                 <option value="">-- join a new community --</option>
                 {communities.map((community, index) => (
@@ -398,8 +404,8 @@ const ViewPosts = () => {
                 ))}
               </select>
               <button
-                className="bg-green-700 text-white text-xs rounded-lg p-2"
-                style={{ width: "167px", height: "32px" }}
+                className="bg-gray-500 text-white text-xs rounded-lg p-2"
+                style={{ width: "100%", height: "32px" }}
                 onClick={handleJoinComm}
               >
                 {isJoining ? <Loader /> : "+ Join a new community"}
