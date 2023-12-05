@@ -797,6 +797,18 @@
   padding: 10px 0;
 }
 
+/* ================================= */
+
+.option-btn-wrapper {
+  margin: 10px;
+  display: flex;
+  justify-content: right;
+}
+
+.mobile-tab {
+  display: block !important;
+}
+
 @media screen and (min-width: 768px) {
   .description-div {
     top: 30%;
@@ -990,6 +1002,21 @@
 
   #add-btn {
     width: 100%;
+  }
+
+  .mobile-tab {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .hide {
+    display: none !important;
+  }
+
+  .chat-form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 49px;
   }
 }
 
