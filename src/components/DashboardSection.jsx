@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 import avatar from "../assets/avatar.png";
-import send from "../assets//chat-images/cil_send.png";
+import send from "../assets/send.png";
 import singleLogo from "../assets/chat-images/logo-icon.png";
 import LineChart from "../components/LineChart";
 import { data1, data2 } from "../components/ChartData";

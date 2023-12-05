@@ -960,7 +960,7 @@
   }
 
   #dashboard-send-icon {
-    width: 11%;
+    width: 8%;
   }
 
   .daily-forcast {
@@ -1017,6 +1017,10 @@
     display: flex;
     justify-content: center;
     padding-bottom: 49px;
+  }
+
+  .content-section {
+    padding: 1rem 0;
   }
 }
 
