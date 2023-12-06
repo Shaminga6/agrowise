@@ -7,32 +7,34 @@ import Loader from "../components/Loader";
 import berryMenu from "../assets/berryMenu.png";
 
 const ViewPosts = () => {
-  const posts = [
+  const prePosts = [
     {
+      owner: "Sarah Greenfield",
       id: 1,
       community: "Cultivating Colony",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit reprehenderit labore molestias tenetur doloremque quas eligendi, rerum culpa consequatur ratione sed nesciunt facere laudantium at magnam recusandae similique! Repellat, libero!",
+      post: "Hey fellow farmers! 🌾 I've been dealing with some pest issues lately, and I'm curious to know what sustainable pest control methods have worked best for you. Share your experiences, tips, and recommendations! Let's keep our crops healthy and thriving. #PestControl #SustainableFarming",
     },
     {
+      owner: "David Cropper",
       id: 2,
       community: "Ploughshare Society",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit reprehenderit labore molestias tenetur doloremque quas eligendi, rerum culpa consequatur ratione sed nesciunt facere laudantium at magnam recusandae similique! Repellat, libero!",
+      post: "Greetings Ploughshare Society! 🌱 I'm exploring different crop rotation strategies to improve soil health and prevent diseases. What crop rotation practices have you found effective? Any lessons learned or tips for a newbie like me? Let's discuss and learn from each other! #CropRotation #SoilHealth",
     },
     {
+      owner: " Olivia Waters",
       id: 3,
       community: "Cultivating Colony",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit reprehenderit labore molestias tenetur doloremque quas eligendi, rerum culpa consequatur ratione sed nesciunt facere laudantium at magnam recusandae similique! Repellat, libero!",
+      post: " Howdy farmers! 💦 I'm in the market for a new irrigation system for my fields and orchards. Do you have a favorite irrigation system that has proven efficient and water-saving? Share your insights and experiences, and let's have a fruitful discussion on the best irrigation practices! #Irrigation #WaterManagement",
     },
     {
+      owner: "  Jonathan Frost",
       id: 4,
       community: "Ploughshare Society",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit reprehenderit labore molestias tenetur doloremque quas eligendi, rerum culpa consequatur ratione sed nesciunt facere laudantium at magnam recusandae similique! Repellat, libero!",
+      post: "Hello Ag friends! 🌧️ Dealing with unpredictable weather patterns can be challenging. How do you handle extreme weather conditions such as droughts, floods, or unexpected frosts? Let's share our coping strategies and support each other in overcoming these weather-related obstacles. #WeatherChallenges #FarmersSupportingFarmers",
     },
   ];
+
+  const [posts, setPosts] = useState(prePosts);
 
   const navigate = useNavigate();
   const [isCommunity, setCommunity] = useState(false);
@@ -47,6 +49,8 @@ const ViewPosts = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isJoining, setIsJoining] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const token = JSON.parse(localStorage.getItem("token"));
+
 
   useEffect(() => {
     // Fetch chat history when the component mounts
@@ -55,7 +59,7 @@ const ViewPosts = () => {
     fetch("https://agrowise-api.vercel.app/api/communities/", {
       method: "GET",
       headers: {
-        "content-type": "application/json",
+        "post-type": "application/json",
         Authorization: `Bearer ${token.access}`,
       },
     })
@@ -71,31 +75,6 @@ const ViewPosts = () => {
       });
   }, []);
 
-  useEffect(() => {
-    // Fetch chat history when the component mounts
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    fetch("https://agrowise-api.vercel.app/api/communities/me/", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${token.access}`,
-      },
-    })
-      .then((response) => {
-        console.log("Response:", response);
-        return response.json();
-      })
-      .then((data) => {
-        const fetchedData = data;
-        console.log(fetchedData);
-      })
-      .catch((error) => {
-        console.error("Error fetching Communities:", error);
-      });
-  }, []);
-
-  const token = JSON.parse(localStorage.getItem("token"));
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -109,7 +88,7 @@ const ViewPosts = () => {
     fetch(`https://agrowise-api.vercel.app/api/communities/me/`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "post-type": "application/json",
         Authorization: `Bearer ${token.access}`,
       },
       body: JSON.stringify({
@@ -136,7 +115,7 @@ const ViewPosts = () => {
     fetch(`https://agrowise-api.vercel.app/api/communities/${slug}/join/`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "post-type": "application/json",
         Authorization: `Bearer ${token.access}`,
       },
     })
@@ -171,6 +150,7 @@ const ViewPosts = () => {
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
+
   const handleComment = (index) => {
     setComment((prevComment) => {
       const updatedComment = [...prevComment];
@@ -179,26 +159,6 @@ const ViewPosts = () => {
     });
   };
   const user = JSON.parse(localStorage.getItem("userData")) || {};
-
-  // -------- Redirect user if logged in -----------------
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    const res = fetch("https://agrowise-api.vercel.app/api/articles/", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${token.access}`,
-      },
-    });
-
-    console.log(res);
-    const userData = localStorage.getItem("userData");
-
-    if (!userData) {
-      navigate("/login");
-    }
-  }, [navigate]);
 
   return (
     <>
@@ -416,23 +376,23 @@ const ViewPosts = () => {
 
         {/* Topics */}
         <div className="w-full p-6 max-sm:p-2">
-          {posts.map((post, index) => (
+          {posts.reverse().map(({ id, owner, community, post }, index) => (
             <>
               <div
-                key={post.id}
+                key={id}
                 className="flex flex-col gap-3 mb-4 forum shadow-xl p-6 max-sm:p-4 rounded-lg"
               >
                 <div className="text-xs flex gap-2 items-center justify-between">
                   <div className="flex gap-2 items-center max-sm:gap-1">
                     <img src={avatar} alt="" className="w-7 max-sm:w-5" />
-                    <p className="max-sm:text-xs">{user.first_name}</p>
+                    <p className="max-sm:text-xs">{owner}</p>
                   </div>
                   <div className="flex items-center gap-4">
                     <p
                       className="px-2 py-1 rounded-md font-thin max-sm:text-xs"
                       style={{ background: "#FFE0B2" }}
                     >
-                      {post.community}
+                      {community}
                     </p>
                     <div className="flex gap-1 items-center max-sm:hidden">
                       <img src={time} alt="" />1 hour ago
@@ -460,9 +420,7 @@ const ViewPosts = () => {
                   </div>
                 </div>
 
-                <p className="text-sm font-light text-gray-800">
-                  {post.content}
-                </p>
+                <p className="text-sm font-light text-gray-800">{post}</p>
 
                 <div className="text-xs flex gap-2 items-center justify-between">
                   <div className="flex gap-3 items-center text-sm font-light">

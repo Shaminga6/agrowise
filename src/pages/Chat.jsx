@@ -14,25 +14,27 @@ const Chat = () => {
   return (
     <>
       <Template />
-      <div className="flex ml-64 max-[640px]:ml-0">
-        {isSidebarVisible && <Sidebar />}
-        <button
-          className="bg-transparent flex flex-col items-center justify-center h-fit m-auto py-2 px-2 hide-chat-history"
-          onClick={handleToggleSidebar}
-          title="Hide chat history"
-        >
+
+      <div className=" sm:ml-64">
+        <div className="flex">
+          {/* -------- Col 1 ------------ */}
+          {isSidebarVisible && (
+            <div
+              className="w-1/4 chat-history-bar"
+              style={{ position: "relative", height: "100dvh" }}
+            >
+              <Sidebar />
+            </div>
+          )}
+
+          {/* -------- Col 2 ------------ */}
           <div
-            className={`h-4 -m-1 w-1 rounded-full bg-green-600 ${
-              isSidebarVisible ? "rotate-down" : "rotate-up"
-            }`}
-          ></div>
-          <div
-            className={`h-4 w-1 rounded-full bg-green-600 ${
-              isSidebarVisible ? "rotate-up" : "rotate-down"
-            }`}
-          ></div>
-        </button>
-        <ChatArea />
+            className="w-3/4 "
+            style={{ width: "100%", height: "100dvh", backgroundColor: "#fbfefa" }}
+          >
+            <ChatArea data={{ handleToggleSidebar, isSidebarVisible, setIsSidebarVisible }} />
+          </div>
+        </div>
       </div>
     </>
   );

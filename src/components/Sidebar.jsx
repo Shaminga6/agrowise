@@ -39,7 +39,6 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className='mt-8'>
         <aside className='flex h-screen'>
           <div className='chat-trail w-72 rounded-tr-lg py-8 flex flex-col items-center'>
             <button onClick={handleNewChat}
@@ -57,7 +56,6 @@ const Sidebar = () => {
             </div>
           </div>
         </aside>
-      </div>
     </>
   );
 }
