@@ -26,6 +26,7 @@ const Template = () => {
   const handleLogout = () => {
     localStorage.removeItem("userData");
     localStorage.removeItem("token");
+    localStorage.removeItem("posts")
     navigate("/");
   };
 
